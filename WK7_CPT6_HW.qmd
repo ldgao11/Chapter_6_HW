@@ -1,0 +1,83 @@
+---
+title: "WK7_chapter6_HW"
+author: "Lidan Gao"
+format: pdf
+editor: visual
+---
+
+Homework
+
+Due: 3/7/24 before class at 3:00 pm.
+
+1.  **What purpose to Makefile serve?**
+
+    A Makefile serves as an organizational tool for the data gathering process by automating and managing the workflow required to prepare the dataset. It ensures that data is collected, cleaned, and merged systematically, only re-running tasks when their dependent files have changed. This not only streamlines the workflow but also makes it repeatable, reducing errors and saving time.
+
+2.  What is the function to download a URL?
+
+    The function is **download.file().**
+
+3.  What is a .zip file?
+
+    A .zip file is a compressed file that may include one or more files.
+
+4.  What is the process to download and decompress a .zip file? Give an example in a R code chunk.
+
+Download, decompress, and create a data frame object in R
+
+Step 1: create a temporary file with tempfile()
+
+Step 2: download the file with download.file()
+
+Step 3: decompress the file with commands in R
+
+Step 4: read the file with read.csv() or import()
+
+```{r,echo=FALSE}
+
+# For simplicity, store the URL in an object called 'URL'
+
+URL <- paste0("http://www.unified-democracy-scores.org/",
+"files/20140312/z/uds_summary.csv.gz")
+
+# Create a temporary file called 'temp' to put the zip file into.
+
+temp <- tempfile()
+
+# # Download the compressed file into the temporary file
+
+download.file(URL, temp)
+
+# # Decompress the file and convert it into a data frame
+
+uds_data <- read.csv(gzfile(temp, "uds_summary.csv"))
+
+```
+
+5.  What are APIs?
+
+    APIs, or Application Programming Interfaces, are sets of rules and protocols for building and interacting with software applications. They allow different software systems to communicate with each other.
+
+6.  Use WDI package to download a new dataset other than AG.CON.FERT.ZS
+
+    ```{r, echo=FALSE}
+    library(WDI)
+
+    WDIsearch("fertilizer consumption")
+
+    fert_cons_data <- WDI(indicator = "AG.CON.FERT.PT.ZS",
+    start = 2010, end = 2015)
+
+    head(fert_cons_data)
+
+    ```
+
+7.  Indicate 3 new things you learned from this week.
+
+    I leanred the concept of makefile and API. I learned how to download compressed file online and extract data from the website.
+
+8.  Create a repository on your GitHub account and upload all files for Week_6_HW. Include the Quarto document, clean PDF with answers, separate text files for data used. Paste the link to the GitHub repository.
+
+    <https://github.com/ldgao11/Chapter_6_HW.git>
+
+Submit A clean PDF with your homework responses.
